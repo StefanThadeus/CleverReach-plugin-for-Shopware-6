@@ -1,0 +1,208 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!--        CONTROLLERS -->
+        <service id="Logeecom\CleverReachPlugin\Controller\API\Backend\WelcomeController"
+                 public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\Controller\API\Backend\RouterController"
+                 public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConnectionServiceInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SynchronizationServiceInterface"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\Controller\API\Backend\SynchronizationController"
+                 public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SynchronizationServiceInterface"/>
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\Controller\API\Backend\CheckStatusController"
+                 public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConnectionServiceInterface"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\Controller\API\Frontend\WebhookController"
+                 public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\WebhookServiceInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverServiceInterface"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <!--        SERVICES    -->
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\AuthService" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthProxyInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConnectionServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\ConnectionService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SynchronizationServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\SynchronizationService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\GroupServiceInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AttributeServiceInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverServiceInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\WebhookServiceInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\GroupServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\GroupService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\GroupProxyInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AttributeServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\AttributeService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AttributeProxyInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\ReceiverService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\CustomerRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverProxyInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\WebhookServiceInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Services\WebhookService" public="true">
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\WebhookProxyInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"/>
+        </service>
+
+        <!--        PROXIES  -->
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthProxyInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Proxies\AuthProxy" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverProxyInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Proxies\ReceiverProxy" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"/>
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\GroupProxyInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Proxies\GroupProxy" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"/>
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AttributeProxyInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Proxies\AttributeProxy" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"/>
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\AuthServiceInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\WebhookProxyInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\Proxies\WebhookProxy" public="true">
+            <argument type="service" id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"/>
+        </service>
+
+        <!--        HTTPCLIENT  -->
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientInterface"
+                 class="Logeecom\CleverReachPlugin\BusinessLogic\HttpClient\HttpClientService" public="true"/>
+
+        <!--        REPOSITORIES    -->
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ConfigRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\ConfigRepository" public="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\CustomerRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\CustomerRepository" public="true">
+            <argument type="service" id="customer.repository"/>
+            <argument type="service" id="customer_group_translation.repository"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\LanguageRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SalutationRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SalesChannelRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\CustomerAddressRepositoryInterface"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\PaymentRepositoryInterface"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\LanguageRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\LanguageRepository" public="true">
+            <argument type="service" id="language.repository"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SalutationRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\SalutationRepository" public="true">
+            <argument type="service" id="salutation.repository"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\SalesChannelRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\SalesChannelRepository" public="true">
+            <argument type="service" id="sales_channel_translation.repository"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\PaymentRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\PaymentRepository" public="true">
+            <argument type="service" id="payment_method.repository"/>
+        </service>
+
+        <service id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\CustomerAddressRepositoryInterface"
+                 class="Logeecom\CleverReachPlugin\DataAccess\CustomerAddressRepository" public="true">
+            <argument type="service" id="customer_address.repository"/>
+            <argument type="service" id="country_translation.repository"/>
+            <argument type="service" id="country_state_translation.repository"/>
+        </service>
+
+        <!--        EVENT SUBSCRIBERS   -->
+        <service id="Logeecom\CleverReachPlugin\Subscriber\CustomerSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service"
+                      id="Logeecom\CleverReachPlugin\BusinessLogic\Interfaces\ReceiverServiceInterface"/>
+        </service>
+    </services>
+</container>

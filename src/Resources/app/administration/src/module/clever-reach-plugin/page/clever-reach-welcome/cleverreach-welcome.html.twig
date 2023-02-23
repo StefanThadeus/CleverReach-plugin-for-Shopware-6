@@ -1,0 +1,11 @@
+{% block cleverreach_welcome %}
+    <div class="sw-cleverreach-welcome">
+        <sw-loader v-if="isLoading" />
+        <div class="sw-cleverreach-form-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2TdpHAB5xbd5FhID_yZFp9fnQkh4fsRDnB0uwDEfD&s" alt="logo"/>
+            <h2>Welcome to CleverReach!</h2>
+            <p>Connect, synchronize customer data, and create appealing emails to showcase your products to your customers!</p>
+            <button @click="startAuthorizationProcess">Connect</button>
+        </div>
+    </div>
+{% endblock %}

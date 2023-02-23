@@ -1,0 +1,77 @@
+.sw-cleverreach-dashboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .sw-cleverreach-form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 6px 6px 20px #0005;
+    max-width: 450px;
+    text-align: center;
+    padding: 55px 30px;
+    transition: all 1s ease;
+
+    .sw-cleverreach-header {
+      font-size: 18px;
+      margin-bottom: 10px;
+
+      .client-id {
+        font-weight: bold;
+      }
+
+      img {
+        width: 80%;
+        margin-bottom: 30px;
+      }
+    }
+
+    .sw-cleverreach-sync-status {
+      font-weight: bold;
+
+      .status {
+        &-done {
+          color: mediumseagreen;
+        }
+
+        &-progress {
+          color: darkorange;
+        }
+
+        &-error {
+          color: red;
+        }
+      }
+    }
+
+    button {
+      margin-top: 35px;
+      padding: 14px 65px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      background-color: darkorange;
+      transition: all 0.5s;
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 4px 12px #0003;
+      }
+
+      &:active {
+        transition: all 0.1s;
+        background-color: orangered;
+        box-shadow: 4px 4px 10px #0005;
+        transform: translateY(3px);
+      }
+    }
+  }
+
+  .sw-cleverreach-form-container:hover {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 30px #0003;
+  }
+}

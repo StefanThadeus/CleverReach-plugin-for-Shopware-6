@@ -1,0 +1,11 @@
+{% block cleverreach_index %}
+    <sw-page :showSearchBar="false" :showSmartBar="false">
+        <sw-card-view slot="content">
+            <div class="sw-cleverreach-index">
+                <img src="https://digimember.com/wp-content/uploads/2019/11/logo-cleverreach.png"  alt="logo"/>
+                <cleverreach-welcome v-if="this.$route.params.page==='welcome'"/>
+                <cleverreach-dashboard v-else-if="this.$route.params.page==='dashboard'"/>
+            </div>
+        </sw-card-view>
+    </sw-page>
+{% endblock %}

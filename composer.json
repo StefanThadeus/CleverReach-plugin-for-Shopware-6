@@ -1,0 +1,28 @@
+{
+  "name": "logeecom/clever-reach-plugin",
+  "description": "Skeleton Shopware6 plugin",
+  "version": "1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Logeecom\\CleverReachPlugin\\": "src/"
+    }
+  },
+  "extra": {
+    "plugin-icon": "src/Resources/config/plugin.png",
+    "shopware-plugin-class": "Logeecom\\CleverReachPlugin\\CleverReachPlugin",
+    "label": {
+      "en-GB": "CleverReach Plugin",
+      "de-DE": "CleverReach Plugin"
+    },
+    "description": {
+        "en-GB": "CleverReach integration with Shopware.",
+        "de-DE": "CleverReach integration with Shopware."
+      }
+  },
+  "require": {
+    "ext-json": "*",
+    "ext-curl": "*"
+  }
+}
